@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>محمد & حنان ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff8fab;
+            --rose: #ffb3c6;
+            --gold: #f5cc63;
+            --mint: #72efdd;
+            --ink: #fff7fb;
+            --muted: rgba(255, 247, 251, 0.68);
+            --bg: #050308;
+            --panel: rgba(255, 255, 255, 0.095);
+            --panel-strong: rgba(255, 255, 255, 0.16);
+            --line: rgba(255, 255, 255, 0.18);
+            --shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .ambient {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 18% 12%, rgba(255, 77, 109, 0.35), transparent 28%),
+                radial-gradient(circle at 80% 20%, rgba(245, 204, 99, 0.18), transparent 28%),
+                radial-gradient(circle at 52% 82%, rgba(114, 239, 221, 0.13), transparent 32%),
+                linear-gradient(145deg, #07030a 0%, #170611 46%, #030305 100%);
+            z-index: 0;
+        }
+
+        .ambient::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+        }
+
+        .hearts-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-particle {
+            position: absolute;
+            top: -40px;
+            color: var(--primary);
+            opacity: 0.38;
+            animation: fall linear infinite;
+            filter: drop-shadow(0 0 9px rgba(255, 77, 109, 0.85));
+        }
+
+        @keyframes fall {
+            to { transform: translateY(112vh) rotate(360deg); }
+        }
+
+        .screen {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            transition: opacity 700ms ease, transform 800ms cubic-bezier(.2,.8,.2,1);
+        }
+
+        #gift-screen {
+            display: grid;
+            place-items: center;
+            padding: 22px;
+        }
+
+        #gift-screen.hidden {
+            opacity: 0;
+            transform: translateY(-4%) scale(1.02);
+            pointer-events: none;
+        }
+
+        .gift-stage {
+            width: min(430px, 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .gift-copy {
+            margin-bottom: 26px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            border: 1px solid rgba(245, 204, 99, 0.35);
+            background: rgba(245, 204, 99, 0.08);
+            padding: 8px 13px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            backdrop-filter: blur(18px);
+        }
+
+        .gift-copy h1 {
+            margin: 18px 0 8px;
+            font-size: clamp(25px, 6.8vw, 42px);
+            line-height: 1.05;
+            letter-spacing: 0;
+            white-space: nowrap;
+            direction: ltr;
+            text-shadow: 0 20px 60px rgba(255, 77, 109, 0.35);
+        }
+
+        .gift-copy p {
+            margin: 0 auto;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 340px;
+            font-size: 15px;
+        }
+
+        .gift-button {
+            position: relative;
+            width: 230px;
+            height: 220px;
+            margin: 0 auto 26px;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            filter: drop-shadow(0 28px 45px rgba(255, 77, 109, 0.3));
+            animation: giftFloat 2.8s ease-in-out infinite;
+        }
+
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .gift-lid,
+        .gift-box {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+            border: 1px solid rgba(255,255,255,0.28);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 22px 70px rgba(255, 77, 109, 0.22);
+        }
+
+        .gift-lid {
+            top: 35px;
+            width: 210px;
+            height: 55px;
+            border-radius: 22px 22px 10px 10px;
+            z-index: 3;
+            transform-origin: 15% 100%;
+            transition: transform 650ms cubic-bezier(.2,.8,.2,1), top 650ms ease;
+        }
+
+        .gift-box {
+            bottom: 24px;
+            width: 188px;
+            height: 122px;
+            border-radius: 18px 18px 26px 26px;
+            overflow: hidden;
+        }
+
+        .gift-lid::before,
+        .gift-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 36px;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, #ffe29a, #f5cc63);
+            box-shadow: 0 0 28px rgba(245, 204, 99, 0.45);
+        }
+
+        .gift-ribbon {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 110px;
+            height: 64px;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+
+        .gift-ribbon::before,
+        .gift-ribbon::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 54px;
+            height: 54px;
+            border: 12px solid var(--gold);
+            border-radius: 50% 50% 8px 50%;
+            box-shadow: 0 0 20px rgba(245, 204, 99, 0.35);
+        }
+
+        .gift-ribbon::before {
+            right: 50%;
+            transform: rotate(-18deg);
+        }
+
+        .gift-ribbon::after {
+            left: 50%;
+            transform: scaleX(-1) rotate(-18deg);
+        }
+
+        .gift-spark {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 400ms ease;
+        }
+
+        .gift-spark i {
+            position: absolute;
+            color: var(--gold);
+            filter: drop-shadow(0 0 12px rgba(245, 204, 99, 0.9));
+        }
+
+        .gift-spark i:nth-child(1) { top: 20px; left: 36px; }
+        .gift-spark i:nth-child(2) { top: 55px; right: 22px; color: var(--mint); }
+        .gift-spark i:nth-child(3) { bottom: 65px; left: 6px; color: var(--rose); }
+
+        .gift-button.opening .gift-lid {
+            top: -12px;
+            transform: translateX(-50%) rotate(-22deg);
+        }
+
+        .gift-button.opening .gift-spark {
+            opacity: 1;
+        }
+
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 0 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.24);
+            color: white;
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.92), rgba(255, 143, 171, 0.82));
+            box-shadow: 0 16px 34px rgba(255, 77, 109, 0.28);
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        #app {
+            display: none;
+            opacity: 0;
+            transform: translateY(18px);
+            overflow: hidden;
+        }
+
+        #app.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .app-shell {
+            height: 100dvh;
+            overflow: hidden;
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        .topbar {
+            padding: 16px 18px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            gap: 12px;
+        }
+
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            color: var(--gold);
+            background: var(--panel);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(22px) saturate(1.7);
+            box-shadow: var(--shadow);
+        }
+
+        .brand h2 {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .brand span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .icon-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 18px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: white;
+            display: grid;
+            place-items: center;
+            backdrop-filter: blur(22px) saturate(1.7);
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .content {
+            overflow: hidden;
+            padding: 8px 16px 0;
+        }
+
+        .page {
+            display: none;
+            height: 100%;
+            overflow-y: auto;
+            padding: 10px 0 96px;
+            scrollbar-width: none;
+        }
+
+        .page::-webkit-scrollbar {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: pageIn 420ms ease both;
+        }
+
+        @keyframes pageIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-card,
+        .glass-card,
+        .mini-card,
+        .letter-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.055));
+            border: 1px solid var(--line);
+            backdrop-filter: blur(28px) saturate(1.8);
+            -webkit-backdrop-filter: blur(28px) saturate(1.8);
+            box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .hero-card {
+            border-radius: 30px;
+            padding: 24px;
+            min-height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -35% -20%;
+            height: 150px;
+            background: radial-gradient(circle at center, rgba(255, 77, 109, 0.35), transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-card h1 {
+            margin: 18px 0 10px;
+            font-size: clamp(32px, 10vw, 48px);
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .hero-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 360px;
+        }
+
+        .quick-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            margin: 0 0 18px;
+        }
+
+        .mini-card {
+            min-height: 142px;
+            border-radius: 24px;
+            padding: 24px;
+            display: grid;
+            align-content: center;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .mini-card i {
+            color: var(--gold);
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+
+        .mini-card strong {
+            display: block;
+            font-size: 22px;
+        }
+
+        .mini-card span {
+            display: block;
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 22px 2px 12px;
+            gap: 12px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .section-title span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .count-box {
+            border-radius: 23px;
+            padding: 16px 8px;
+            text-align: center;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(22px);
+        }
+
+        .count-num {
+            display: block;
+            color: var(--rose);
+            font-size: 24px;
+            font-weight: 950;
+            text-shadow: 0 0 18px rgba(255, 77, 109, 0.45);
+        }
+
+        .count-label {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .music-card {
+            margin-top: 16px;
+            border-radius: 28px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .music-card .cover {
+            width: 58px;
+            height: 58px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            box-shadow: 0 14px 35px rgba(255, 77, 109, 0.25);
+        }
+
+        .music-card strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        .music-card span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .promise-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .promise-item {
+            border-radius: 26px;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .promise-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: rgba(245, 204, 99, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(245, 204, 99, 0.24);
+        }
+
+        .promise-item strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .promise-item span {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .note-card {
+            min-height: 155px;
+            perspective: 900px;
+            cursor: pointer;
+        }
+
+        .note-inner {
+            position: relative;
+            width: 100%;
+            height: 155px;
+            transition: transform 720ms cubic-bezier(.2,.8,.2,1);
+            transform-style: preserve-3d;
+        }
+
+        .note-card.flipped .note-inner {
+            transform: rotateY(180deg);
+        }
+
+        .note-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            backface-visibility: hidden;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .note-front i {
+            color: var(--gold);
+            font-size: 34px;
+        }
+
+        .note-front span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 12px;
+        }
+
+        .note-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.92), rgba(255, 143, 171, 0.82));
+            font-weight: 800;
+            line-height: 1.65;
+        }
+
+        .gallery-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .photo-card {
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .photo-card img {
+            width: 100%;
+            aspect-ratio: 4 / 4.7;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.08) contrast(1.03);
+        }
+
+        .photo-card figcaption {
+            margin: 0;
+            padding: 16px 18px 18px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .letter-card {
+            border-radius: 34px;
+            padding: 26px 22px;
+            text-align: center;
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 204, 99, 0.22), transparent 65%);
+            top: -80px;
+            right: -80px;
+        }
+
+        .letter-card i {
+            color: var(--primary);
+            font-size: 42px;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 18px rgba(255, 77, 109, 0.7));
+        }
+
+        .letter-card h2 {
+            margin: 0 0 16px;
+            font-size: 30px;
+        }
+
+        .letter-card p {
+            margin: 0;
+            color: rgba(255,255,255,0.86);
+            line-height: 1.95;
+            font-size: 16px;
+        }
+
+        .signature {
+            margin-top: 24px;
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: 950;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            z-index: 20;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            padding: 8px;
+            border-radius: 28px;
+            background: rgba(20, 12, 20, 0.58);
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(30px) saturate(1.8);
+            -webkit-backdrop-filter: blur(30px) saturate(1.8);
+            box-shadow: 0 20px 70px rgba(0,0,0,0.45);
+        }
+
+        .nav-btn {
+            min-width: 0;
+            height: 58px;
+            border-radius: 22px;
+            border: 0;
+            background: transparent;
+            color: rgba(255,255,255,0.62);
+            display: grid;
+            place-items: center;
+            gap: 3px;
+            cursor: pointer;
+        }
+
+        .nav-btn i {
+            font-size: 17px;
+        }
+
+        .nav-btn span {
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .nav-btn.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.16);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 90px;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            z-index: 40;
+            color: white;
+            background: rgba(255, 77, 109, 0.78);
+            border: 1px solid rgba(255,255,255,0.22);
+            backdrop-filter: blur(20px);
+            border-radius: 999px;
+            padding: 11px 16px;
+            font-weight: 800;
+            transition: 350ms ease;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (min-width: 720px) {
+            .app-shell {
+                max-width: 520px;
+                margin: 0 auto;
+            }
+
+            .bottom-nav {
+                left: 50%;
+                right: auto;
+                width: min(496px, calc(100vw - 24px));
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 370px) {
+            .content { padding-inline: 12px; }
+            .counter-grid { gap: 8px; }
+            .count-num { font-size: 21px; }
+            .nav-btn span { font-size: 9px; }
+            .notes-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* HeartLink additions: password gate and platform credit */
+        .heartlink-password {
+            width: min(340px, 100%);
+            margin: 0 auto 22px;
+            padding: 18px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.045));
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.28);
+        }
+        .heartlink-password label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--ink);
+            font-weight: 900;
+            font-size: 15px;
+        }
+        .heartlink-password-row {
+            display: flex;
+            gap: 8px;
+        }
+        .heartlink-password input {
+            min-width: 0;
+            flex: 1;
+            width: 100%;
+            padding: 12px 10px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            outline: none;
+            color: white;
+            background: rgba(0,0,0,0.24);
+            text-align: center;
+            font: inherit;
+        }
+        .heartlink-password input::placeholder { color: rgba(255,255,255,0.52); }
+        .heartlink-password button {
+            border: 0;
+            border-radius: 14px;
+            padding: 0 13px;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-weight: 900;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .heartlink-password small {
+            display: block;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+        .heartlink-password.error input { border-color: #ff6b81; }
+        .heartlink-password.error small { color: #ff9aaa; }
+        .gift-button[hidden], .primary-btn[hidden] { display: none; }
+
+        .heartlink-credit {
+            position: fixed;
+            left: 50%;
+            bottom: 94px;
+            transform: translateX(-50%);
+            z-index: 19;
+            text-decoration: none;
+            color: rgba(255,255,255,0.78);
+            font-size: 11px;
+            font-weight: 700;
+            font-family: inherit;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            transition: 0.25s ease;
+        }
+        .heartlink-credit:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.09);
+            transform: translateX(-50%) translateY(-2px);
+        }
+        @media (max-width: 480px) {
+            .heartlink-credit { font-size: 10px; bottom: 92px; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="hearts-bg" id="hearts-container"></div>
+
+    <section id="gift-screen" class="screen">
+        <div class="gift-stage">
+            <div class="gift-copy animate__animated animate__fadeInDown">
+                <span class="eyebrow"><i class="fa-solid fa-heart"></i> I Love You</span>
+                <h1>محمد & حنان</h1>
+                <p>𝑭𝒓𝒐𝒎 𝒎𝒚 𝒉𝒆𝒂𝒓𝒕 𝒕𝒐 𝒎𝒚 𝒃𝒆𝒂𝒕 𝒐𝒇 𝒎𝒚 𝒉𝒆𝒂𝒓𝒕•••♡! ♥</p>
+            </div>
+
+            <div class="heartlink-password" id="passwordGate">
+                <label for="giftPassword">الهدية دي ليكي وبس ❤️</label>
+                <div class="heartlink-password-row">
+                    <input id="giftPassword" type="password" inputmode="numeric" autocomplete="off" placeholder="اكتبي الباسورد">
+                    <button id="unlockGift" type="button">افتحي القفل</button>
+                </div>
+                <small id="passwordHint">سرّنا الصغير بينا 💗</small>
+            </div>
+
+            <button class="gift-button" id="giftButton" type="button" aria-label="افتحي الهدية" hidden>
+                <span class="gift-spark">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-star"></i>
+                </span>
+                <span class="gift-ribbon"></span>
+                <span class="gift-lid"></span>
+                <span class="gift-box"></span>
+            </button>
+
+            <button class="primary-btn" id="openGift" type="button" hidden>
+                <i class="fa-solid fa-gift"></i>
+                افتحي الهدية
+            </button>
+        </div>
+    </section>
+
+    <main id="app" class="screen" aria-live="polite">
+        <div class="app-shell">
+            <header class="topbar">
+                <div class="brand">
+                    <div class="brand-mark"><i class="fa-solid fa-heart"></i></div>
+                    <div>
+                        <h2>محمد & حنان</h2>
+                        <span>عالمنا الصغير</span>
+                    </div>
+                </div>
+                <button class="icon-btn" id="musicToggle" type="button" aria-label="تشغيل أو إيقاف الموسيقى">
+                    <i id="pIcon" class="fa-solid fa-play"></i>
+                </button>
+            </header>
+
+            <div class="content">
+                <section class="page active" id="page-home">
+                    <div class="quick-row">
+                        <div class="mini-card">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <strong>من 19 أغسطس 2026</strong>
+                            <span>بداية الحكاية اللي بتكبر كل يوم</span>
+                        </div>
+                    </div>
+                    <audio id="loveSong" loop src="https://files.catbox.moe/ll4n4b.mp3" style="display:none"></audio>
+
+                    <div class="section-title">
+                        <h3>منذ أن بدأت القصة</h3>
+                        <span>عداد الحب</span>
+                    </div>
+                    <div class="counter-grid">
+                        <div class="count-box"><span id="years" class="count-num">0</span><span class="count-label">سنة</span></div>
+                        <div class="count-box"><span id="months" class="count-num">0</span><span class="count-label">شهر</span></div>
+                        <div class="count-box"><span id="days" class="count-num">0</span><span class="count-label">يوم</span></div>
+                        <div class="count-box"><span id="hours" class="count-num">0</span><span class="count-label">ساعة</span></div>
+                        <div class="count-box"><span id="mins" class="count-num">0</span><span class="count-label">دقيقة</span></div>
+                        <div class="count-box"><span id="secs" class="count-num">0</span><span class="count-label">ثانية</span></div>
+                    </div>
+
+                </section>
+
+                <section class="page" id="page-promises">
+                    <div class="section-title">
+                        <h3>وعودي ليكي</h3>
+                        <span>مش كلام، ده عهد</span>
+                    </div>
+                    <div class="promise-list">
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                            <div>
+                                <strong>أوعدك أكون ضهرك مهما حصل 💪❤️</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-face-laugh-beam"></i></div>
+                            <div>
+                                <strong>أوعدك أضحكك حتى في عز حزنك 😂🌹</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div>
+                                <strong>أوعدك أكون أمانك وسط الدنيا 🛡️🤍</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-moon"></i></div>
+                            <div>
+                                <strong>أوعدك أديك راحة قبل النوم 🌙😌</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                            <div>
+                                <strong>أوعدك أشاركك فرحتك قبل أي حد 🎉💞</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-ear-listen"></i></div>
+                            <div>
+                                <strong>أوعدك أسمعك حتى لو الدنيا مشغولة 👂💫</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+                            <div>
+                                <strong>أوعدك أكون سبب ابتسامتك كل يوم 😊🌈</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-battery-full"></i></div>
+                            <div>
+                                <strong>أوعدك أديك طاقة لما تتعب 🔋🤗</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-handshake"></i></div>
+                            <div>
+                                <strong>أوعدك أكون سندك في كل قرار 🤝✨</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                        <article class="glass-card promise-item">
+                            <div class="promise-icon"><i class="fa-solid fa-heart"></i></div>
+                            <div>
+                                <strong>أوعدك أحبك أكتر مع كل لحظة ❤️🔥</strong>
+                                <span></span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="page" id="page-notes">
+                    <div class="section-title">
+                        <h3>رسايل صغيرة</h3>
+                        <span>اضغطي على أي كارت</span>
+                    </div>
+                    <div class="notes-grid">
+                        <article class="note-card">
+                            <div class="note-inner">
+                                <div class="note-face note-front glass-card"><div><i class="fa-solid fa-envelope"></i><span>افتحيني</span></div></div>
+                                <div class="note-face note-back">كل</div>
+                            </div>
+                        </article>
+                        <article class="note-card">
+                            <div class="note-inner">
+                                <div class="note-face note-front glass-card"><div><i class="fa-solid fa-star"></i><span>افتحيني</span></div></div>
+                                <div class="note-face note-back">سنين العمر</div>
+                            </div>
+                        </article>
+                        <article class="note-card">
+                            <div class="note-inner">
+                                <div class="note-face note-front glass-card"><div><i class="fa-solid fa-crown"></i><span>افتحيني</span></div></div>
+                                <div class="note-face note-back">وانتي</div>
+                            </div>
+                        </article>
+                        <article class="note-card">
+                            <div class="note-inner">
+                                <div class="note-face note-front glass-card"><div><i class="fa-solid fa-bolt"></i><span>افتحيني</span></div></div>
+                                <div class="note-face note-back">معايا</div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="page" id="page-gallery">
+                    <div class="section-title">
+                        <h3>صورنا</h3>
+                        <span>ذكرياتنا الحلوة</span>
+                    </div>
+                    <div class="gallery-grid">
+                        <figure class="glass-card photo-card">
+                            <img src="https://h.top4top.io/p_3967q06in1.jpg" alt="ذكرى جميلة">
+                            <figcaption>أحلى ذكرى لينا ❤️</figcaption>
+                        </figure>
+                        <figure class="glass-card photo-card">
+                            <img src="https://i.top4top.io/p_3967khzvm1.jpg" alt="لحظة جميلة">
+                            <figcaption>ضحكتك هي حياتي ✨</figcaption>
+                        </figure>
+                        <figure class="glass-card photo-card">
+                            <img src="https://j.top4top.io/p_3967cukh11.jpg" alt="عالمنا الخاص">
+                            <figcaption>عالمي الخاص بيكي</figcaption>
+                        </figure>
+                        <figure class="glass-card photo-card">
+                            <img src="https://k.top4top.io/p_3967l2ll21.jpg" alt="محمد وحنان">
+                            <figcaption>كل لحظة معاكي غالية ❤️</figcaption>
+                        </figure>
+                        <figure class="glass-card photo-card">
+                            <img src="https://a.top4top.io/p_39679d3zi1.jpg" alt="ذكرى حب">
+                            <figcaption>انتي أجمل حكاياتي 💍</figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="page" id="page-letter">
+                    <article class="letter-card">
+                        <i class="fa-solid fa-heart"></i>
+                        <h2>دي عايز اقولك ي اغلي حاجه ف حياتي ي حببتي🌍</h2>
+                        <p>
+                            انتي مش متخيله انتي عندي ايه انتي احن و اطيب قلب و اعظم انسانه في الدنيا كلها انتي الامان و الحنان و كل حاجه حلوه في حياتي ربنا يديمك في حياتي احسن حاجه حصلت في الدنيا دايما مفرحاني و مخلياني طاير من الفرحه واحنا سوا و بنتكلم عيونك بتخليني احس بالحب اللي جواكي لو فضلت باصصلك سنين حياتي الجايه مش هزهق ابدا بجد انا بحبك اكتر من نفسي و بحبك اكتر حاجه في العالم محدش هيحبك قدي في الدنيا انا مكتفي بيكي و موافق افضل معاكي بس لو مقفول علينا حتي مش عايز حد في العالم غيرك انتي مفيش زيك و مجاش في حياتي زيك ولا قابلت ولا هقابل ولا عايز اقابل حد بعدك مهما اتكلمت و وصفتلك انتي عارفه اللي جوايا و عارفه ان اي كلام قولته مش هيكفي حبي ليكي ولا هعرف اوصفه اصلا انتي حياتي اللي فاتت و اللي جايه و كل سنين عمري ❤️❤️
+                            <br>بحبك يا كل العالم 🌏❤️
+                        </p>
+                        <div class="signature">بحبك يا حنان ❤️</div>
+                    </article>
+                </section>
+            </div>
+
+            <nav class="bottom-nav" aria-label="أقسام الهدية">
+                <button class="nav-btn active" type="button" data-page="page-home"><i class="fa-solid fa-house"></i><span>البداية</span></button>
+                <button class="nav-btn" type="button" data-page="page-promises"><i class="fa-solid fa-hand-holding-heart"></i><span>وعودي</span></button>
+                <button class="nav-btn" type="button" data-page="page-notes"><i class="fa-solid fa-envelope-open-text"></i><span>رسايل</span></button>
+                <button class="nav-btn" type="button" data-page="page-gallery"><i class="fa-solid fa-images"></i><span>صورنا</span></button>
+                <button class="nav-btn" type="button" data-page="page-letter"><i class="fa-solid fa-heart"></i><span>الرسالة</span></button>
+            </nav>
+        </div>
+    </main>
+
+    <div class="toast" id="toast">اتفتحت الهدية يا حنان ❤️</div>
+
+    <a class="heartlink-credit" href="https://wa.me/201125674359" target="_blank" rel="noopener noreferrer">Made with ❤️ by HeartLink</a>
+
+    <script>
+        // Per-gift image recovery. Site-wide rollout requires access to the HeartLink website templates.
+        document.querySelectorAll('img').forEach((img) => {
+            const original = img.getAttribute('src');
+            if (original && /^https?:\/\//i.test(original) && !original.includes('wsrv.nl')) {
+                img.dataset.heartlinkOriginal = original;
+                img.src = 'https://wsrv.nl/?url=' + encodeURIComponent(original.replace(/^https:/i, 'http:'));
+            }
+            img.addEventListener('error', function () {
+                if (this.dataset.heartlinkFallbackUsed) return;
+                this.dataset.heartlinkFallbackUsed = '1';
+                const source = this.dataset.heartlinkOriginal || this.src;
+                try {
+                    const parsed = new URL(source);
+                    this.src = 'https://i0.wp.com/' + parsed.host + parsed.pathname + parsed.search;
+                } catch (e) { /* Leave the browser's normal broken-image behavior if URL parsing fails. */ }
+            });
+        });
+    </script>
+
+    <script>
+        const state = {
+            counterStarted: false,
+            heartsStarted: false
+        };
+
+        const giftScreen = document.getElementById('gift-screen');
+        const app = document.getElementById('app');
+        const giftButton = document.getElementById('giftButton');
+        const openGiftButton = document.getElementById('openGift');
+        const musicToggle = document.getElementById('musicToggle');
+        const toast = document.getElementById('toast');
+        const passwordGate = document.getElementById('passwordGate');
+        const passwordInput = document.getElementById('giftPassword');
+        const unlockGiftButton = document.getElementById('unlockGift');
+        const passwordHint = document.getElementById('passwordHint');
+        let giftUnlocked = false;
+
+        function normalizePassword(value) {
+            return value.replace(/[٠-٩]/g, digit => '٠١٢٣٤٥٦٧٨٩'.indexOf(digit)).replace(/[۰-۹]/g, digit => '۰۱۲۳۴۵۶۷۸۹'.indexOf(digit)).replace(/[\\s/]/g, '-');
+        }
+
+        function unlockGift() {
+            if (normalizePassword(passwordInput.value.trim()) === '1-9-2026') {
+                giftUnlocked = true;
+                passwordGate.hidden = true;
+                giftButton.hidden = false;
+                openGiftButton.hidden = false;
+                showToast('الباسورد صح ❤️ الهدية مستنياكي');
+            } else {
+                passwordGate.classList.add('error');
+                passwordHint.textContent = 'الباسورد مش صحيح، جربي تاني ❤️';
+                passwordInput.focus();
+            }
+        }
+        unlockGiftButton.addEventListener('click', unlockGift);
+        passwordInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') unlockGift();
+        });
+
+        function openGift() {
+            if (!giftUnlocked) return;
+            giftButton.classList.add('opening');
+            showToast('اتفتحت الهدية يا حنان ❤️');
+
+            setTimeout(() => {
+                giftScreen.classList.add('hidden');
+                app.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+                startCounter();
+                createHearts();
+                playMusic();
+            }, 650);
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        function startCounter() {
+            if (state.counterStarted) return;
+            state.counterStarted = true;
+
+            const start = new Date("2026-08-19T00:00:00");
+            const update = () => {
+                const diff = new Date() - start;
+                document.getElementById('years').innerText = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+                document.getElementById('months').innerText = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                document.getElementById('days').innerText = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            };
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        function playMusic() {
+            const audio = document.getElementById('loveSong');
+            const icon = document.getElementById('pIcon');
+            audio.play()
+                .then(() => icon.className = 'fa-solid fa-pause')
+                .catch(() => {
+                    icon.className = 'fa-solid fa-play';
+                    showToast('لو الموسيقى مشتغلتش، دوسي على زر الموسيقى فوق');
+                });
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('loveSong');
+            const icon = document.getElementById('pIcon');
+
+            if (audio.paused) {
+                playMusic();
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play';
+            }
+        }
+
+        function createHearts() {
+            if (state.heartsStarted) return;
+            state.heartsStarted = true;
+
+            const container = document.getElementById('hearts-container');
+            setInterval(() => {
+                const heart = document.createElement('i');
+                const random = Math.random();
+                heart.className = random > 0.82 ? 'fa-solid fa-star heart-particle' : 'fa-solid fa-heart heart-particle';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3.5 + 4.5) + 's';
+                heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                heart.style.opacity = (Math.random() * 0.3 + 0.18).toFixed(2);
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 8200);
+            }, 360);
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.toggle('active', page.id === pageId);
+                if (page.id === pageId) page.scrollTop = 0;
+            });
+
+            document.querySelectorAll('.nav-btn').forEach(button => {
+                button.classList.toggle('active', button.dataset.page === pageId);
+            });
+        }
+
+        openGiftButton.addEventListener('click', openGift);
+        giftButton.addEventListener('click', openGift);
+        musicToggle.addEventListener('click', toggleMusic);
+
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', () => switchPage(button.dataset.page));
+        });
+
+        document.querySelectorAll('.note-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('flipped'));
+        });
+    </script>
+    <script>
+      window.HEARTLINK_GIFT_ID = "gift-mohamed-hanan-2026-08-19";
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/HeartLink349/Heart_Link@a665165/heartlink-lock.js"></script>
+</body>
+</html>
